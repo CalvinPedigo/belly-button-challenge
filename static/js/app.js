@@ -71,7 +71,7 @@ function buildCharts(sample) {
     };
 
     // Render the Bubble Chart
-    Plotly.newPlot('bubble',bubbleChart, bubbleLayout);
+    Plotly.newPlot('bubble',bubbles, bubbleLayout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
     let otuString = otu_ids.map(data => String(`OTU ${data}`));
@@ -80,7 +80,7 @@ function buildCharts(sample) {
     // Don't forget to slice and reverse the input data appropriately
     let xyBar = {
       x: sample_values.slice(0,10).reverse(),
-      y: string_otu.slice(0,10).reverse(),
+      y: otuString.slice(0,10).reverse(),
       text: otu_labels.slice(0,10).reverse(),
       type: "bar",
       orientation: "h"
@@ -97,7 +97,7 @@ function buildCharts(sample) {
     let barData = [xyBar];
 
     // Render the Bar Chart
-    Plotly.newPlot('bar', xyBar, barLayout);
+    Plotly.newPlot('bar', barData, barLayout);
   });
 }
 
@@ -120,7 +120,7 @@ function init() {
     }
 
     // Get the first sample from the list
-    let firstSamp = ids[0]
+    let firstSamp = nameField[0]
 
     // Build charts and metadata panel with the first sample
     buildMetadata(firstSamp)
